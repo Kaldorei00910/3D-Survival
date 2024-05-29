@@ -45,4 +45,6 @@ public class ItemData : ScriptableObject
     public float DurationTimeForSpeed;
     public ItemDataConsumable[] consumables;
 
+    [Header("Equip")]
+    public GameObject equipPrefab;
 }
