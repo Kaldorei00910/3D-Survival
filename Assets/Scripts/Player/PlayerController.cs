@@ -129,4 +129,22 @@ public class PlayerController : MonoBehaviour
         canLook = !toggle;
     }
 
+    public void ChangeSpeed(float speed, float sec)//속도를 변화시키는 메서드
+    {
+        StartCoroutine(SpeedUpForSec(speed, sec));
+        StopCoroutine(SpeedUpForSec(speed,sec));
+
+    }
+    private IEnumerator SpeedUpForSec(float speed, float sec)
+    {       
+
+        moveSpeed += speed;
+
+        yield return new WaitForSeconds(sec);
+
+        moveSpeed -= speed;
+    }
+
+
+
 }

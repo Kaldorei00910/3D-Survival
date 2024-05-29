@@ -22,8 +22,13 @@ public class UIInventory : MonoBehaviour
     public GameObject unequipButton;
     public GameObject dropButton;
 
+    [Header("Show Effect")]
+    public GameObject effectObject;
+
     private PlayerController controller;
     private PlayerCondition condition;
+    
+    private EffectIndicator effectIndicator;
 
     ItemData selectedItem;
     int selectedItemIndex = 0;
@@ -34,6 +39,7 @@ public class UIInventory : MonoBehaviour
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
         dropPosition = CharacterManager.Instance.Player.dropPosition;
+        effectIndicator = effectObject.GetComponent<EffectIndicator>();
 
         controller.inventory += Toggle;
         CharacterManager.Instance.Player.addItem += AddItem;
@@ -199,6 +205,11 @@ public class UIInventory : MonoBehaviour
                         break;
                     case ConsumableType.Hunger:
                         condition.Eat(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.Speed:
+                        controller.ChangeSpeed(selectedItem.consumables[i].value, selectedItem.DurationTimeForSpeed);
+                        effectObject.SetActive(true);
+                        effectIndicator.SkillOnEffect(selectedItem.DurationTimeForSpeed);
                         break;
                 }
             }
