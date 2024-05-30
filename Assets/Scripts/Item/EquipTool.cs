@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class EquipTool : Equip
 {
@@ -16,16 +18,26 @@ public class EquipTool : Equip
     public bool doesDealDamage;
     public int damage;
 
+    [Header("Utillity")]
+    public float speedUp;
+    public float durationTime;
+
     private Animator animator;
     private Camera camera;
+    public PlayerController controller;
 
+    //public GameObject effectObject;
+    //private EffectIndicator effectIndicator;
 
     // Start is called before the first frame update
     void Start()
     {
+        //effectIndicator = effectObject.GetComponent<EffectIndicator>();
+        controller = CharacterManager.Instance.Player.GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         camera = Camera.main;
     }
+
 
     public override void OnAttackInput()
     {
@@ -34,6 +46,13 @@ public class EquipTool : Equip
             attacking = true;
             animator.SetTrigger("Attack");
             Invoke("OnCanAttack",attackRate);
+
+            if(speedUp > 0)
+            {
+                controller.ChangeSpeed(speedUp, durationTime);
+                //effectObject.SetActive(true);
+                //effectIndicator.SkillOnEffect(durationTime);
+            }
         }
     }
 

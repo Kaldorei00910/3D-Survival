@@ -23,4 +23,4 @@ MonoBehaviour:
   maxStackAmount: 0
   DurationTimeForSpeed: 0
   consumables: []
-  equipPrefab: {fileID: 5879125452881221677, guid: 70ff9dbe4644adb4d8b4761e5fd8a4f0, type: 3}
+  equipPrefab: {fileID: 6647536091617440371, guid: e2e10e35d114c8f47aaaa55c6177cbc1, type: 3}
